@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime World</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: #333;
+            color: #fff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-container img {
+            height: 40px;
+            width: auto;
+            border-radius: 5px;
+        }
+
+        .logo-container h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #fff;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 18px;
+            position: relative;
+            transition: color 0.5s ease;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #f4b400;
+            transition: 0.4s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            background: url('https://wallpapercat.com/w/full/2/0/6/1215980-3840x2160-desktop-4k-goku-background-image.jpg') no-repeat center center/cover;
+            color: #fff;
+        }
+
+        .hero h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInDown 1s ease-in-out;
+            color: #ffeb3b;
+            text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ff5722, 0 0 30px #f44336;
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #ffeb3b, 0 0 20px #ff5722; }
+            to { text-shadow: 0 0 20px #f44336, 0 0 30px #ffeb3b; }
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        .btn {
+            background: #fff;
+            color: #333;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: 0.3s;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .btn:hover {
+            background: #333;
+            color: #fff;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- Gallery Section --- */
+        .gallery {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .gallery img {
+            border-radius: 10px;
+            width: 200px;
+            margin: 10px;
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.1);
+        }
+
+        /* --- Character Cards --- */
+        .characters {
+            padding: 50px;
+            text-align: center;
+            background: #f9f9f9;
+        }
+
+        .characters h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .card h3 {
+            margin: 15px 0 5px;
+            font-size: 22px;
+            color: #222;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .card:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* --- Image Slider --- */
+        .slider {
+            text-align: center;
+            padding: 50px;
+            background: #f4f4f4;
+        }
+
+        .slider h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .slider-container {
+            position: relative;
+            max-width: 80%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .slides img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 50%;
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+
+        .prev:hover, .next:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        /* --- Table Section --- */
+        .table-section {
+            padding: 50px;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            font-size: 18px;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        thead tr {
+            background: #333;
+            color: #fff;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f4f4f4;
+        }
+        
+        tbody tr:hover {
+            background: #f1f1f1;
+        }
+
+        /* --- Quotes Section --- */
+        .quotes {
+            padding: 50px;
+            text-align: center;
+            background: #222;
+            color: #fff;
+        }
+
+        .quotes h2 {
+            margin-bottom: 20px;
+        }
+
+        .quotes p {
+            font-style: italic;
+            margin: 10px 0;
+        }
+
+        /* --- News Section --- */
+        .news-section {
+            padding: 50px;
+            background: #f4f4f4;
+            text-align: center;
+        }
+        
+        .news-section .card {
+            background: #fff;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-section .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-section .card-content {
+            padding: 15px;
+        }
+
+        .news-section .card h3 {
+            margin: 10px 0;
+        }
+
+        .news-section .card p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .news-section .card button {
+            background: #333;
+            color: #fff;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .news-section .card button:hover {
+            background: #f4b400;
+            color: #333;
+        }
+
+        .news-section .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* --- Contact Form --- */
+        .contact {
+            padding: 50px;
+            text-align: center;
+        }
+
+        .contact form {
+            max-width: 400px;
+            margin: auto;
+            text-align: left;
+        }
+        
+        .contact input, .contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact button {
+            padding: 10px 20px;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .contact button:hover {
+            background: #f4b400;
+            color: #000;
+        }
+        
+        /* --- Back to Top Button --- */
+        #topBtn {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #333;
+            color: #fff;
+            margin-top: 50px;
+            transition: background 0.5s ease, color 0.5s ease;
+        }
+
+        /* --- Dark Mode Styles --- */
+        .dark-mode {
+            background: #121212;
+            color: #f4f4f4;
+        }
+
+        .dark-mode header,
+        .dark-mode footer {
+            background: #1e1e1e;
+        }
+
+        .dark-mode nav a {
+            color: #ddd;
+        }
+
+        .dark-mode .characters,
+        .dark-mode .table-section,
+        .dark-mode .contact,
+        .dark-mode .news-section,
+        .dark-mode .slider {
+            background: #1c1c1c;
+        }
+        
+        .dark-mode .card {
+            background: #2e2e2e;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark-mode .card h3 {
+            color: #f4f4f4;
+        }
+        
+        .dark-mode .card p {
+            color: #ccc;
+        }
+
+        .dark-mode table {
+            background: #2e2e2e;
+            color: #f4f4f4;
+        }
+
+        .dark-mode th,
+        .dark-mode td {
+            border-color: #555;
+        }
+        
+        .dark-mode thead tr {
+            background: #1e1e1e;
+            color: #fff;
+        }
+        
+        .dark-mode tbody tr:nth-child(even) {
+            background: #1c1c1c;
+        }
+        
+        .dark-mode tbody tr:hover {
+            background: #383838;
+        }
+
+        .dark-mode input, .dark-mode textarea {
+            background: #444;
+            color: #fff;
+            border: 1px solid #666;
+        }
+
+        /* --- Toggle Button --- */
+        #themeToggle {
+            margin-left: 15px;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            background: #f4b400;
+            color: #333;
+            font-size: 20px;
+            transition: all 0.4s ease;
+        }
+
+        #themeToggle:hover {
+            background: #ff7043;
+            color: #fff;
+            transform: rotate(20deg) scale(1.1);
+        }
+        
+        /* --- Modal Styling --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            max-width: 600px;
+            text-align: center;
+            animation: fadeIn 0.4s;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Anime_logo.png" alt="Logo">
+            <h1>Anime World</h1>
+        </div>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+        <button id="themeToggle">🌙</button>
+    </header>
+
+    <section class="hero">
+        <h2 id="heroText"></h2>
+        <p>Wake up to reality... Nothing ever goes as planned in this accursed world.</p>
+        <button class="btn" onclick="showMessage()">Click Me</button>
+    </section>
+    
+    <section class="characters">
+        <h2>Popular Anime Characters</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAvuVyBzt1Y5ZzVCJslKiF-jQEf_GtpkN3_Q&s" alt="Goku">
+                <h3>Goku</h3>
+                <p>Dragon Ball Z</p>
+            </div>
+            <div class="card">
+                <img src="https://wallpapercave.com/wp/wp6539078.png" alt="Naruto">
+                <h3>Naruto Uzumaki</h3>
+                <p>Naruto</p>
+            </div>
+            <div class="card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2LLgb0VzdcYjOAK9VwVJUvRvsztpFOkbT6A&s" alt="Luffy">
+                <h3>Monkey D. Luffy</h3>
+                <p>One Piece</p>
+            </div>
+        </div>
+    </section>
+
+</style>
+   
+
+    <section class="table-section">
+        <h2>Top 10 Anime Characters</h2>
+        <input type="text" id="searchInput" placeholder="Search character..." style="padding:10px; width:250px; margin:20px; border-radius:5px; border:1px solid #ccc;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Character</th>
+                    <th>Anime</th>
+                </tr>
+            >
+            <tbody id="animeTableBody">
+                <tr><td>1</td><td>Naruto Uzumaki</td><td>Naruto</td></tr>
+                <tr><td>2</td><td>Monkey D. Luffy</td><td>One Piece</td></tr>
+                <tr><td>3</td><td>Goku</td><td>Dragon Ball Z</td></tr>
+                <tr><td>4</td><td>Levi Ackerman</td><td>Attack on Titan</td></tr>
+                <tr><td>5</td><td>Itachi Uchiha</td><td>Naruto</td></tr>
+                <tr><td>6</td><td>Zoro Roronoa</td><td>One Piece</td></tr>
+                <tr><td>7</td><td>Light Yagami</td><td>Death Note</td></tr>
+                <tr><td>8</td><td>Sasuke Uchiha</td><td>Naruto</td></tr>
+                <tr><td>9</td><td>Eren Yeager</td><td>Attack on Titan</td></tr>
+                <tr><td>10</td><td>Gojo Satoru</td><td>Jujutsu Kaisen</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="quotes">
+        <h2>Famous Anime Quotes</h2>
+        <p>“Power comes in response to a need, not a desire.” – Goku</p>
+        <p>“A lesson without pain is meaningless.” – Edward Elric</p>
+        <p>“Those who break the rules are scum, but those who abandon their friends are worse than scum.” – Kakashi Hatake</p>
+        <p>“Fear is not evil. It tells you what your weakness is.” – Gildarts Clive</p>
+    </section>
+
+    <section class="news-section">
+        <h2>Latest Anime News</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" alt="Naruto">
+                <div class="card-content">
+                    <h3>Naruto Shippuden</h3>
+                    <p>Naruto returns with new adventures...</p>
+                    <button onclick="openModal('narutoModal')">Read More</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://cdn.myanimelist.net/images/anime/1208/94745.jpg" alt="Attack on Titan">
+                <div class="card-content">
+                    <h3>Attack on Titan Final Season</h3>
+                    <p>Eren Yeager’s journey reaches its climax...</p>
+                    <button onclick="openModal('aotModal')">Read More</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://cdn.myanimelist.net/images/anime/1286/99889.jpg" alt="Demon Slayer">
+                <div class="card-content">
+                    <h3>Demon Slayer</h3>
+                    <p>Tanjiro continues his mission...</p>
+                    <button onclick="openModal('dsModal')">Read More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <h2>Contact Us</h2>
+        <form id="contactForm">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" placeholder="Your Name" required><br>
+            
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" placeholder="Your Email" required><br>
+            
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea><br>
+            
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <div id="narutoModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('narutoModal')">×</span>
+            <h2>Naruto Shippuden</h2>
+            <p>Naruto Shippuden follows the story of Naruto Uzumaki after his training journey. He faces Akatsuki, saves his village, and continues chasing his dream of becoming Hokage.</p>
+        </div>
+    </div>
+
+    <div id="aotModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('aotModal')">×</span>
+            <h2>Attack on Titan Final Season</h2>
+            <p>The final battle between humans and titans begins. Eren’s choices shape the fate of the entire world.</p>
+        </div>
+    </div>
+
+    <div id="dsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('dsModal')">×</span>
+            <h2>Demon Slayer</h2>
+            <p>Tanjiro and his friends fight powerful demons with breathtaking battles and emotional storytelling.</p>
+        </div>
+    </div>
+
+    <button id="topBtn">↑</button>
+
+    <footer>
+        © 2025 Anime World | All Rights Reserved
+    </footer>
+
+    <script>
+        // --- Back to Top Button ---
+        const topBtn = document.getElementById("topBtn");
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+        };
+        topBtn.onclick = function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        // --- Theme Toggle ---
+        const toggleBtn = document.getElementById("themeToggle");
+        toggleBtn.onclick = function () {
+            document.body.classList.toggle("dark-mode");
+            if (document.body.classList.contains("dark-mode")) {
+                toggleBtn.textContent = "☀️";
+            } else {
+                toggleBtn.textContent = "🌙";
+            }
+        };
+        
+        // --- Hero Text Typewriter Effect ---
+        const text = "Welcome to Anime World";
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("heroText").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        window.onload = typeWriter;
+
+        // --- Image Slider ---
+        let index = 0;
+        const slides = document.querySelector(".slides");
+        const totalSlides = slides.children.length;
+        
+        function moveSlide(step) {
+            index = (index + step + totalSlides) % totalSlides;
+            slides.style.transform = `translateX(${-index * 100}%)`;
+        }
+        
+        setInterval(() => {
+            moveSlide(1);
+        }, 4000);
+
+        // --- Table Search Functionality ---
+        document.getElementById("searchInput").addEventListener("keyup", function() {
+            let filter = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#animeTableBody tr");
+        
+            rows.forEach(row => {
+                let text = row.innerText.toLowerCase();
+                row.style.display = text.includes(filter) ? "" : "none";
+            });
+        });
+
+        // --- Contact Form Submission ---
+        document.getElementById("contactForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            let name = document.getElementById("name").value;
+            let email = document.getElementById("email").value;
+            let message = document.getElementById("message").value;
+
+            alert("Thank you " + name + "! Your message has been received.\n\nEmail: " + email + "\nMessage: " + message);
+            
+            this.reset();
+        });
+
+        // --- Modal Functions ---
+        function openModal(id) {
+            document.getElementById(id).style.display = "flex";
+        }
+        
+        function closeModal(id) {
+            document.getElementById(id).style.display = "none";
+        }
+        
+        // --- Other Simple Scripts ---
+        function showMessage() {
+            alert("Thank you for visiting Anime World!");
+        }
+    </script>
+
+</body>
+</html>
+<section class="quiz-section">
+    <h2>Anime Quiz</h2>
+    <div id="quiz-container">
+        <h3 id="question"></h3>
+        <div id="answers" class="answers-container"></div>
+        <button id="next-btn" class="btn" style="display:none;">Next</button>
+        <div id="result"></div>
+    </div>
+</section>
+<style>.quiz-section {
+    padding: 50px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+#quiz-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.answers-container button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f0f0f0;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.answers-container button:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+}
+
+.answers-container button.correct {
+    background: #4caf50;
+    color: white;
+}
+
+.answers-container button.incorrect {
+    background: #f44336;
+    color: white;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}</style>
+<script>const questions = [
+    {
+        question: "Who is the protagonist of 'One Piece'?",
+        answers: ["Goku", "Luffy", "Naruto", "Levi"],
+        correct: "Luffy"
+    },
+    {
+        question: "What is the name of Goku's signature move?",
+        answers: ["Rasengan", "Spirit Bomb", "Chidori", "Gum-Gum Pistol"],
+        correct: "Spirit Bomb"
+    },
+    {
+        question: "In which anime do characters use 'Jutsus'?",
+        answers: ["One Piece", "Naruto", "Dragon Ball Z", "Bleach"],
+        correct: "Naruto"
+    }
+];
+
+let currentQuestionIndex = 0;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("next-btn");
+const resultEl = document.getElementById("result");
+
+function showQuestion() {
+    const q = questions[currentQuestionIndex];
+    questionEl.textContent = q.question;
+    answersEl.innerHTML = '';
+    
+    q.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.onclick = () => checkAnswer(answer, q.correct);
+        answersEl.appendChild(button);
+    });
+}
+
+function checkAnswer(selected, correct) {
+    const buttons = answersEl.querySelectorAll("button");
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn.textContent === correct) {
+            btn.classList.add("correct");
+        }
+        if (btn.textContent === selected && selected !== correct) {
+            btn.classList.add("incorrect");
+        }
+    });
+
+    if (selected === correct) {
+        resultEl.textContent = "Correct! ✅";
+    } else {
+        resultEl.textContent = "Incorrect. ❌";
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        resultEl.textContent = "";
+        nextBtn.style.display = "none";
+        showQuestion();
+    } else {
+        questionEl.textContent = "Quiz finished! Thanks for playing.";
+        answersEl.innerHTML = "";
+        nextBtn.style.display = "none";
+        resultEl.textContent = "";
+    }
+};
+
+document.addEventListener("DOMContentLoaded", showQuestion);</script>
+<section class="poll-section">
+    <h2>Vote for Your Favorite Big Three Anime!</h2>
+    <div id="poll-options">
+        <button onclick="vote('Naruto')">Naruto</button>
+        <button onclick="vote('One Piece')">One Piece</button>
+        <button onclick="vote('Dragon Ball Z')">Dragon Ball Z</button>
+    </div>
+    <div id="poll-results">
+        <h3>Poll Results:</h3>
+        <div class="result-bar-container">
+            <p>Naruto:</p>
+            <div class="result-bar" id="naruto-bar"><span>0%</span></div>
+        </div>
+        <div class="result-bar-container">
+            <p>One Piece:</p>
+            <div class="result-bar" id="onepiece-bar"><span>0%</span></div>
+        </div>
+        <div class="result-bar-container">
+            <p>Dragon Ball Z:</p>
+            <div class="result-bar" id="dbz-bar"><span>0%</span></div>
+        </div>
+    </div>
+</section>
+<style>.poll-section {
+    padding: 50px;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+#poll-options button {
+    padding: 12px 25px;
+    margin: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    border: 2px solid #333;
+    border-radius: 25px;
+    background: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+#poll-options button:hover {
+    background: #333;
+    color: white;
+}
+
+#poll-results {
+    margin-top: 30px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.result-bar-container {
+    margin-bottom: 15px;
+}
+
+.result-bar {
+    background: #ccc;
+    height: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.result-bar span {
+    display: block;
+    height: 100%;
+    background: #ff5722;
+    text-align: right;
+    padding-right: 5px;
+    color: white;
+    line-height: 25px;
+    transition: width 1s ease-in-out;
+}</style>
+<script>let votes = {
+    "Naruto": 0,
+    "One Piece": 0,
+    "Dragon Ball Z": 0
+};
+
+function vote(option) {
+    votes[option]++;
+    updatePollResults();
+}
+
+function updatePollResults() {
+    const totalVotes = votes["Naruto"] + votes["One Piece"] + votes["Dragon Ball Z"];
+    
+    document.getElementById("naruto-bar").style.width = (votes["Naruto"] / totalVotes * 100 || 0) + "%";
+    document.getElementById("onepiece-bar").style.width = (votes["One Piece"] / totalVotes * 100 || 0) + "%";
+    document.getElementById("dbz-bar").style.width = (votes["Dragon Ball Z"] / totalVotes * 100 || 0) + "%";
+    
+    document.getElementById("naruto-bar").querySelector("span").textContent = (votes["Naruto"] / totalVotes * 100 || 0).toFixed(0) + "%";
+    document.getElementById("onepiece-bar").querySelector("span").textContent = (votes["One Piece"] / totalVotes * 100 || 0).toFixed(0) + "%";
+    document.getElementById("dbz-bar").querySelector("span").textContent = (votes["Dragon Ball Z"] / totalVotes * 100 || 0).toFixed(0) + "%";
+}</script>
+<style>/* --- Responsive Design for Mobile Devices (max-width: 768px) --- */
+@media (max-width: 768px) {
+    /* Main Layout Adjustments */
+    body {
+        font-size: 16px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px 10px;
+    }
+
+    nav {
+        margin-top: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a {
+        margin: 5px 8px;
+        font-size: 16px;
+    }
+
+    .logo-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h2 {
+        font-size: 32px;
+    }
+
+    .hero p {
+        font-size: 18px;
+    }
+
+    /* Cards and Gallery Adjustments */
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .card, .news-section .card {
+        width: 90%; /* full width on mobile */
+    }
+
+    .gallery img {
+        width: 150px;
+        margin: 8px;
+    }
+
+    /* Slider Adjustments */
+    .slider-container {
+        max-width: 95%;
+    }
+
+    .prev, .next {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
+
+    /* Table Adjustments */
+    .table-section table {
+        width: 100%;
+        font-size: 14px;
+        display: block;
+        overflow-x: auto; /* allows horizontal scrolling if table is too wide */
+        white-space: nowrap;
+    }
+
+    /* Form and Other Sections */
+    .contact form {
+        max-width: 90%;
+    }
+}</style>

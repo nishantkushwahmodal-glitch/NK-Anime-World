@@ -611,7 +611,6 @@
                     <th>Character</th>
                     <th>Anime</th>
                 </tr>
-            >
             <tbody id="animeTableBody">
                 <tr><td>1</td><td>Naruto Uzumaki</td><td>Naruto</td></tr>
                 <tr><td>2</td><td>Monkey D. Luffy</td><td>One Piece</td></tr>
@@ -1106,3 +1105,233 @@ function updatePollResults() {
         max-width: 90%;
     }
 }</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NK Anime World</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #eee9e9;
+      color: #340b0b;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      margin: 20px 0;
+      color: #ff4757;
+    }
+
+    /* Like Button */
+    .like-btn {
+      background: #ff4757;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .like-btn:hover {
+      background: #e84118;
+    }
+
+    /* Visitor Counter */
+    #counter {
+      margin: 20px 0;
+      font-size: 18px;
+      color: #1e90ff;
+    }
+
+    /* Quiz Section */
+    .quiz-box {
+      background: #222;
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      border-radius: 10px;
+    }
+    .quiz-btn {
+      background: #1e90ff;
+      border: none;
+      padding: 10px 15px;
+      margin-top: 10px;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+    .quiz-btn:hover {
+      background: #3742fa;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>✨ Welcome to NK Anime World ✨</h1>
+
+  <!-- Like Button -->
+  <h2>Do you like Naruto?</h2>
+  <button class="like-btn" onclick="likeAnime()">👍 Like (<span id="likeCount">0</span>)</button>
+
+  <!-- Visitor Counter -->
+  <div id="counter">Visitors: <span id="visitCount">0</span></div>
+
+  <!-- Quiz Section -->
+  <div class="quiz-box">
+    <h2>⚡ Anime Quiz: Who is the protagonist of Naruto?</h2>
+    <button class="quiz-btn" onclick="checkAnswer('Naruto')">Naruto</button>
+    <button class="quiz-btn" onclick="checkAnswer('Sasuke')">Sasuke</button>
+    <button class="quiz-btn" onclick="checkAnswer('Itachi')">Itachi</button>
+    <p id="quizResult"></p>
+  </div>
+
+  <script>
+    // Like Button
+    let likes = 0;
+    function likeAnime() {
+      likes++;
+      document.getElementById("likeCount").innerText = likes;
+    }
+
+    // Visitor Counter (local storage based)
+    if(localStorage.visitCount){
+      localStorage.visitCount = Number(localStorage.visitCount) + 1;
+    } else {
+      localStorage.visitCount = 1;
+    }
+    document.getElementById("visitCount").innerText = localStorage.visitCount;
+
+    // Quiz
+    function checkAnswer(answer) {
+      let result = document.getElementById("quizResult");
+      if(answer === "Naruto") {
+        result.innerText = "✅ Correct! Naruto Uzumaki is the protagonist.";
+        result.style.color = "lightgreen";
+      } else {
+        result.innerText = "❌ Wrong! Try again.";
+        result.style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NK Anime World - Login</title>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+</head>
+<body>
+  <h1>🔐 Login / Signup</h1>
+  <input type="email" id="email" placeholder="Email"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="signup()">Signup</button>
+  <button onclick="login()">Login</button>
+  <p id="status"></p>
+
+  <script>
+    // Firebase Config (yeh apna Firebase account se lena hoga)
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "SENDER_ID",
+      appId: "APP_ID"
+    };
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    function signup() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      auth.createUserWithEmailAndPassword(email, password)
+        .then(() => document.getElementById("status").innerText = "Signup successful!")
+        .catch(e => alert(e.message));
+    }
+
+    function login() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => document.getElementById("status").innerText = "Login successful!")
+        .catch(e => alert(e.message));
+    }
+  </script>
+</body>
+</html>
+<div id="profile" style="margin:20px; padding:10px; border:1px solid #ccc;">
+  <h2>User Profile</h2>
+  <p><strong>Name:</strong> <span id="username">Guest</span></p>
+  <p><strong>Favorite Anime:</strong> <span id="favAnime">Not set</span></p>
+
+  <input type="text" id="setName" placeholder="Enter Name">
+  <input type="text" id="setAnime" placeholder="Favorite Anime">
+  <button onclick="updateProfile()">Update</button>
+</div>
+
+<script>
+  function updateProfile(){
+    let name = document.getElementById("setName").value;
+    let anime = document.getElementById("setAnime").value;
+    if(name) document.getElementById("username").innerText = name;
+    if(anime) document.getElementById("favAnime").innerText = anime;
+  }
+</script>
+<div style="margin:20px;">
+  <h2>🔥 Trending Anime</h2>
+  <button onclick="loadAnime()">Load Anime</button>
+  <ul id="animeList"></ul>
+</div>
+
+<script>
+  async function loadAnime(){
+    let res = await fetch("https://api.jikan.moe/v4/top/anime");
+    let data = await res.json();
+    let list = document.getElementById("animeList");
+    list.innerHTML = "";
+    data.data.slice(0,5).forEach(anime => {
+      let li = document.createElement("li");
+      li.innerHTML = `<strong>${anime.title}</strong> ⭐ Score: ${anime.score}`;
+      list.appendChild(li);
+    });
+  }
+</script>
+<div style="margin:20px; padding:15px; border:1px solid #444; width:300px;">
+  <h3>🤖 Anime Chatbot</h3>
+  <div id="chatBox" style="height:150px; overflow-y:auto; background:#eee; padding:5px;"></div>
+  <input type="text" id="chatInput" placeholder="Say something..." onkeydown="if(event.key==='Enter'){sendMessage();}">
+  <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+  function sendMessage(){
+    let input = document.getElementById("chatInput").value;
+    let box = document.getElementById("chatBox");
+    if(!input) return;
+
+    // User message
+    let userMsg = document.createElement("div");
+    userMsg.innerHTML = "<b>You:</b> " + input;
+    box.appendChild(userMsg);
+
+    // Bot reply
+    let botMsg = document.createElement("div");
+    let reply = "Hmm... I love anime too!";
+    if(input.toLowerCase().includes("naruto")) reply = "🍥 Naruto is the ultimate ninja!";
+    if(input.toLowerCase().includes("luffy")) reply = "☠️ Luffy wants to be Pirate King!";
+    if(input.toLowerCase().includes("goku")) reply = "💥 Goku is the strongest Saiyan!";
+    botMsg.innerHTML = "<b>Bot:</b> " + reply;
+    box.appendChild(botMsg);
+
+    box.scrollTop = box.scrollHeight;
+    document.getElementById("chatInput").value = "";
+  }
+</script>

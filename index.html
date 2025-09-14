@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5JBNF29ZE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-F5JBNF29ZE'); // Apna Measurement ID yaha daalo
+</script>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime World</title>
@@ -1334,4 +1344,39 @@ function updatePollResults() {
     box.scrollTop = box.scrollHeight;
     document.getElementById("chatInput").value = "";
   }
+</script>
+<script>
+function getBotResponse(userInput) {
+  userInput = userInput.toLowerCase();
+
+  // Greetings
+  if (userInput.includes("hello") || userInput.includes("hi") || userInput.includes("hey")) {
+    return "Hey! 👋 I am your Anime Chatbot. Ask me anything about anime!";
+  }
+
+  // Naruto
+  else if (userInput.includes("naruto")) {
+    return "Naruto Uzumaki 🍃 is a ninja from Konoha who dreams of becoming Hokage. Believe it!";
+  }
+
+  // One Piece
+  else if (userInput.includes("one piece") || userInput.includes("luffy")) {
+    return "One Piece ☠️ follows Monkey D. Luffy and his crew in search of the legendary treasure!";
+  }
+
+  // Attack on Titan
+  else if (userInput.includes("attack on titan") || userInput.includes("aot") || userInput.includes("eren")) {
+    return "Attack on Titan ⚔️ is about humanity’s fight for survival against Titans. Eren Yeager plays a key role!";
+  }
+
+  // Demon Slayer
+  else if (userInput.includes("demon slayer") || userInput.includes("tanjiro")) {
+    return "Demon Slayer 🔥 follows Tanjiro Kamado and his sister Nezuko as they battle demons!";
+  }
+
+  // Default
+  else {
+    return "Hmm 🤔 I don't know about that yet. Try asking me about Naruto, One Piece, Attack on Titan, or Demon Slayer!";
+  }
+}
 </script>
